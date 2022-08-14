@@ -1,4 +1,4 @@
-#Time in seconds how long a notification will be displayed.
+# Time in seconds how long a notification will be displayed.
 hud_notify.duration (Display Duration) int 10 1 180
 
 #Hides the sender of a notification.
