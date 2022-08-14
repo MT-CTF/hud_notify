@@ -1,3 +1,0 @@
-Shows a message to a player in-game, by means of an HUD element.
-
-Syntax: /notify <player_name> <msg>
