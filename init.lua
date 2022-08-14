@@ -10,7 +10,7 @@ local players = {}
 local duration = tonumber(minetest.settings:get("hud_notify.duration")) or 10
 local hide_sender = minetest.settings:get_bool("hud_notify.hide_sender") or false
 
-local function notify(name, msg)
+local function notify(sender, name, msg)
 	local player = minetest.get_player_by_name(name)
 
 	-- If notification is already being shown modify
@@ -20,7 +20,7 @@ local function notify(name, msg)
 		player:hud_change(players[name].msg, "text", msg)
 		if not hide_sender then
 			player:hud_change(players[name].header, "text",
-								"Notification from " .. name .. ": ")
+								"Notification from " .. sender .. ": ")
 		end
 		return
 	end
@@ -45,14 +45,15 @@ local function notify(name, msg)
 	})
 
 	if not hide_sender then
-		local msg_header = "Notification from " .. name .. ": "
+		local msg_header = "Notification from " .. sender .. ": "
 		players[name].header = player:hud_add({
 			hud_elem_type = "text",
 			position = {x = 0, y = 0},
 			offset = {x = 70, y = 200},
 			alignment = {x = 1, y = 0},
-			number = 0x3399FF,
-			text = msg_header
+			number = 0xFFCC00,
+			text = msg_header,
+			text = "hud_notify_bg.png"
 		})
 	end
 end
@@ -83,11 +84,11 @@ minetest.register_chatcommand("notify", {
 		if not pname or not msg then
 			return false, "Invalid usage, see /help notify."
 		end
-		if not core.get_player_by_name(pname) then
+		if not minetest.get_player_by_name(pname) then
 			return false, "The player " .. pname .. " is not online."
 		end
 
-		notify(pname, msg)
+		notify(name, pname, msg)
 		return true, "Notification sent to " .. pname .. ": \"" .. msg .. "\""
 	end
 })
@@ -103,7 +104,7 @@ minetest.register_chatcommand("notify_all", {
 		end
 
 		for _, player in pairs(minetest.get_connected_players()) do
-			notify(player:get_player_name(), msg)
+			notify(name, player:get_player_name(), msg)
 		end
 		return true, "Global notification sent: \"" .. msg .. "\""
 	end
