@@ -16,7 +16,7 @@ HUD Notify is a mod that can be used display messages using HUD elements (instea
 - `/notify LegendaryGriefer Stop griefing or face a ban!`
 - `/notify_all Attention! The server will be shutting down for maintenance in 15 minutes.`
 
-### minetest.conf
+### Mod Settings
 
 - `hud_notify.hud_duration`
   - Stores a numeric value (10 by default) which represents the duration of the message visibility in seconds.
