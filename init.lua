@@ -52,8 +52,7 @@ local function notify(sender, name, msg)
 			offset = {x = 70, y = 200},
 			alignment = {x = 1, y = 0},
 			number = 0xFFCC00,
-			text = msg_header,
-			text = "hud_notify_bg.png"
+			text = msg_header
 		})
 	end
 end
